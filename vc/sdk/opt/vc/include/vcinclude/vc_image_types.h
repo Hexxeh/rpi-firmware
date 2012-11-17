@@ -25,34 +25,9 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef VCHIQ_MEMDRV_H
-#define VCHIQ_MEMDRV_H
+#ifndef __VC_INCLUDE_IMAGE_TYPES_H__
+#define __VC_INCLUDE_IMAGE_TYPES_H__
 
-/* ---- Include Files ----------------------------------------------------- */
+#include "interface/vctypes/vc_image_types.h"
 
-#include <linux/kernel.h>
-#include "vchiq_if.h"
-
-/* ---- Constants and Types ---------------------------------------------- */
-
-typedef struct
-{
-    void                   *armSharedMemVirt;
-    dma_addr_t              armSharedMemPhys;
-    size_t                  armSharedMemSize;
-
-    void                   *vcSharedMemVirt;
-    dma_addr_t              vcSharedMemPhys;
-    size_t                  vcSharedMemSize;
-
-} VCHIQ_SHARED_MEM_INFO_T;
-
-/* ---- Variable Externs ------------------------------------------------- */
-
-/* ---- Function Prototypes ---------------------------------------------- */
-
-void vchiq_get_shared_mem_info( VCHIQ_SHARED_MEM_INFO_T *info );
-
-VCHIQ_STATUS_T vchiq_memdrv_initialise(void);
-
-#endif
+#endif /* __VC_INCLUDE_IMAGE_TYPES_H__ */

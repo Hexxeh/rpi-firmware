@@ -25,21 +25,12 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef VCHIQ_CONNECTED_H
-#define VCHIQ_CONNECTED_H
+/*
+The symbol vcos_deprecated_code may be defined at most once, by the inclusion of "vcos_deprecated.h" in vcos_init.c.
+Any other inclusions of this header will cause the linker to warn about multiple definitions of vcos_deprecated_code, for example:
+   [ldvc] (Warning) "vcos_deprecated_code" is multiply defined in libs/vcos_threadx/vcos_init.c.o and libs/xxxxx/xxxxx.c.o
+If you see a build message like this then the configuration you are building is using deprecated code.
+Contact the person named in the accompanying comment for advice - do not remove the inclusion.
+*/
 
-/* ---- Include Files ----------------------------------------------------- */
-
-/* ---- Constants and Types ---------------------------------------------- */
-
-typedef void (*VCHIQ_CONNECTED_CALLBACK_T)( void );
-
-/* ---- Variable Externs ------------------------------------------------- */
-
-/* ---- Function Prototypes ---------------------------------------------- */
-
-void vchiq_add_connected_callback( VCHIQ_CONNECTED_CALLBACK_T callback );
-void vchiq_call_connected_callbacks( void );
-
-#endif /* VCHIQ_CONNECTED_H */
-
+int vcos_deprecated_code;

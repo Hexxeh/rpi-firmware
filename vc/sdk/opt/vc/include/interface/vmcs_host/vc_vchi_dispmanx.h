@@ -25,46 +25,45 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef VCHIQ_VC_H
-#define VCHIQ_VC_H
+#ifndef VC_VCHI_DISPMANX_H
+#define VC_VCHI_DISPMANX_H
 
-#include "vchiq_core.h"
+#include "interface/peer/vc_vchi_dispmanx_common.h"
 
-extern char _frdata[];
+#define VC_NUM_HOST_RESOURCES 64
+#define DISPMANX_MSGFIFO_SIZE 1024
+#define DISPMANX_CLIENT_NAME MAKE_FOURCC("DISP")
+#define DISPMANX_NOTIFY_NAME MAKE_FOURCC("UPDH")
 
-#define VCHIQ_IS_SAFE_DATA(x) ((char *)RTOS_ALIAS_NORMAL(x) >= _frdata)
+//Or with command to indicate we don't need a response
+#define DISPMANX_NO_REPLY_MASK (1<<31)
 
-#define VCOS_LOG_CATEGORY (&vchiq_vc_log_category)
+typedef struct {
+   char     description[32];
+   uint32_t width;
+   uint32_t height;
+   uint32_t aspect_pixwidth;
+   uint32_t aspect_pixheight;
+   uint32_t fieldrate_num;
+   uint32_t fieldrate_denom;
+   uint32_t fields_per_frame;
+   uint32_t transform;        
+} GET_MODES_DATA_T;
 
-#define VC_MEMCPY(d,s,l) do { if (l < DMA_MEMCPY_THRESHOLD) memcpy(d,s,l); else dma_memcpy(d,s,l); } while (0)
+typedef struct {
+   int32_t  response;
+   uint32_t width;
+   uint32_t height;
+   uint32_t transform;
+   uint32_t input_format;
+} GET_INFO_DATA_T;
 
-extern VCOS_LOG_CAT_T vchiq_vc_log_category;
-
-typedef struct vchiq_instance_struct
-{
-   VCHIQ_STATE_T state;
-   int connected;
-} VCHIQ_INSTANCE_STRUCT_T;
-
-
-typedef struct vchiq_vc_state_struct {
-   VCOS_EVENT_T                remote_use_active;
-   VCHIQ_REMOTE_USE_CALLBACK_T remote_use_callback;
-   void*                       remote_use_cb_arg;
-   int                         remote_use_sent;
-} VCHIQ_VC_STATE_T;
-
-
-extern VCHIQ_INSTANCE_STRUCT_T vchiq_instances[];
-extern int vchiq_num_instances;
-
-extern VCHIQ_STATUS_T
-vchiq_platform_init(void);
-
-extern VCHIQ_STATUS_T
-vchiq_vc_init_state(VCHIQ_VC_STATE_T* vc_state);
-
-extern VCHIQ_VC_STATE_T*
-vchiq_platform_get_vc_state(VCHIQ_STATE_T *state);
+//Attributes changes flag mask
+#define ELEMENT_CHANGE_LAYER          (1<<0)
+#define ELEMENT_CHANGE_OPACITY        (1<<1)
+#define ELEMENT_CHANGE_DEST_RECT      (1<<2)
+#define ELEMENT_CHANGE_SRC_RECT       (1<<3)
+#define ELEMENT_CHANGE_MASK_RESOURCE  (1<<4)
+#define ELEMENT_CHANGE_TRANSFORM      (1<<5)
 
 #endif

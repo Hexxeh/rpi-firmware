@@ -25,25 +25,20 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef VCHIQ_VC_DMA_XFERS_H
-#define VCHIQ_VC_DMA_XFERS_H
+#ifndef _VCHI_ENDIAN_H_
+#define _VCHI_ENDIAN_H_
 
-/* Opaque declaration for clients of this library */
-typedef struct dma_transfer dma_transfer_t;
+#include "interface/vcos/vcos.h"
 
-extern VCHIQ_STATUS_T
-init_dma_xfers(int max_fragments, FRAGMENTS_T *fragments);
+int16_t  vchi_readbuf_int16 ( const void *ptr );
+uint16_t vchi_readbuf_uint16( const void *ptr );
+uint32_t vchi_readbuf_uint32( const void *ptr );
+vcos_fourcc_t vchi_readbuf_fourcc( const void *ptr );
 
-extern void
-uninit_dma_xfers(void);
+void vchi_writebuf_uint16( void *ptr, uint16_t value );
+void vchi_writebuf_uint32( void *ptr, uint32_t value );
+void vchi_writebuf_fourcc( void *ptr, vcos_fourcc_t value );
 
-extern dma_transfer_t *
-alloc_dma_xfer(void);
+#endif /* _VCHI_ENDIAN_H_ */
 
-extern void
-free_dma_xfer(dma_transfer_t *xfer);
-
-extern int
-dma_memcpy_pagelist(char *vcptr, const PAGELIST_T *pagelist);
-
-#endif /* VCHIQ_VC_DMA_XFERS */
+/********************************** End of file ******************************************/

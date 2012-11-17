@@ -25,41 +25,47 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-/*=============================================================================
-Platform specific configuration parameters.
-=============================================================================*/
+#ifndef _WFCPLATFORM_H_
+#define _WFCPLATFORM_H_
 
-#ifndef VCHOST_CONFIG_H
-#define VCHOST_CONFIG_H
+#include "../KHR/khrplatform.h"
+#include "../EGL/egl.h"
 
-#include "interface/vcos/vcos.h"
-
-#if 0
-/* Types that map onto VideoCore's types of the same name. */
-typedef unsigned char uint8_t;
-typedef unsigned short uint16_t;
-typedef short int16_t;
-typedef long int32_t;
-typedef unsigned long uint32_t;
-typedef long long int64_t;
-typedef unsigned long long uint64_t;
-
-#ifndef vc_assert
-#define vc_assert(cond) vcos_assert(cond)
-#endif
+#ifdef __cplusplus
+extern "C" {
 #endif
 
-/* On this platform we need to be able to release the host-side software resources. */
-extern void vc_os_close(void);
-
-#ifndef VCHPRE_
-#define VCHPRE_     extern
+#ifndef WFC_API_CALL
+#define WFC_API_CALL KHRONOS_APICALL
 #endif
-#ifndef VCHPOST_
-#define VCHPOST_
+#ifndef WFC_APIENTRY
+#define WFC_APIENTRY KHRONOS_APIENTRY
 #endif
-#ifndef VCCPRE_
-#define VCCPRE_     
+#ifndef WFC_APIEXIT
+#define WFC_APIEXIT KHRONOS_APIATTRIBUTES
 #endif
 
+#ifndef WFC_DEFAULT_SCREEN_NUMBER
+#define WFC_DEFAULT_SCREEN_NUMBER (0)
 #endif
+
+typedef enum {
+    WFC_FALSE               = 0,
+    WFC_TRUE                = 1,
+    WFC_BOOLEAN_FORCE_32BIT = 0x7FFFFFFF
+} WFCboolean;
+
+typedef khronos_int32_t   WFCint;
+typedef khronos_float_t   WFCfloat;
+typedef khronos_uint32_t  WFCbitfield;
+typedef khronos_uint32_t  WFCHandle;
+
+typedef EGLDisplay   WFCEGLDisplay;
+typedef void         *WFCEGLSync;   /* An opaque handle to an EGLSyncKHR */
+typedef WFCHandle    WFCNativeStreamType;
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* _WFCPLATFORM_H_ */
