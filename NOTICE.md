@@ -1,3 +1,4 @@
+HASH: 6d25078b7cb361052ae280d552561d7250d33f5b
 #############################################################
 This update bumps to rpi-4.4.y linux tree
 Be aware there could be compatibility issues with some drivers
