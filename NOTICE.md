@@ -9,7 +9,4 @@ engineer.
 
 DO NOT use 'rpi-update' as part of a regular update process.
 
-Be aware there could be compatibility issues with some drivers
-Discussion here:
-https://www.raspberrypi.org/forums/viewtopic.php?f=29&t=224931
 ##############################################################
